@@ -1,6 +1,6 @@
 <script setup>
 import { useCategoryStore } from "@/stores/category.js";
-  const categoryStore = useCategorygiStore()
+  const categoryStore = useCategoryStore()
 
 </script>
 
