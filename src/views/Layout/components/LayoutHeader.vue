@@ -10,8 +10,11 @@ import { useCategoryStore } from "@/stores/category.js";
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
       <ul class="app-header-nav">
+        <li class="home">
+          <RouterLink to ='/' >首页</RouterLink>
+        </li>
         <li class="home" v-for="category in categoryStore.categoryList" :key="category.id">
-          <RouterLink :to="`/category/${category.id}`">{{ category.name }}</RouterLink>
+          <RouterLink active-class="active" :to="`/category/${category.id}`">{{ category.name }}</RouterLink>
         </li>
       </ul>
       <div class="search">
@@ -19,7 +22,6 @@ import { useCategoryStore } from "@/stores/category.js";
         <input type="text" placeholder="搜一搜">
       </div>
       <!-- 头部购物车 -->
-
     </div>
   </header>
 </template>
