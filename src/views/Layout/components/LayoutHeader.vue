@@ -3,7 +3,6 @@ import { useCategoryStore } from "@/stores/category.js";
   const categoryStore = useCategoryStore()
 
 </script>
-
 <template>
   <header class='app-header'>
     <div class="container">
