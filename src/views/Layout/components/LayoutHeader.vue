@@ -12,7 +12,7 @@ import { useCategoryStore } from "@/stores/category.js";
       </h1>
       <ul class="app-header-nav">
         <li class="home" v-for="category in categoryStore.categoryList" :key="category.id">
-          <RouterLink to="/">{{ category.name }}</RouterLink>
+          <RouterLink :to="`/category/${category.id}`">{{ category.name }}</RouterLink>
         </li>
       </ul>
       <div class="search">
