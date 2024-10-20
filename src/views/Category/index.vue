@@ -1,35 +1,14 @@
 <script setup>
-import { getCategoriesAPI } from "@/apis/category.js";
-import { ref,onMounted } from "vue";
-import { useRoute } from "vue-router";
-import {getBannerAPI} from "@/apis/home.js";
 import GoodsItem from "@/views/Home/components/GoodItem.vue";
-import { onBeforeRouteUpdate } from "vue-router";
+import {useBanner} from "@/views/Layout/components/composables/useBanner.js";
+import { useCategory } from "@/views/Layout/components/composables/useCategory.js";
+
+const { bannerList } = useBanner();
+const { categoryData } = useCategory();
 //获取数据
-const categoryData = ref([]);
-const route = useRoute();
-//不改变路由参数时保持原样
-const getCategories = async (id=route.params.id) => {
-  const res = await getCategoriesAPI(id)
-  categoryData.value = res.result
-}
-onMounted(()=>{getCategories()})
-//目标:路由参数变化的时候,可以把分类数据接口分别发送
-onBeforeRouteUpdate((to)=>{
-  console.log('路由变化了')
-  //解决方法: 使用最新的路由参数请求最新的分类数据
-  console.log(to)
-  getCategories(to.params.id)
-})
+
 
 //获取banner
-const bannerlist = ref([])
-const getBanner =async() =>{
-  const res = await getBannerAPI()
-  console.log(res)
-  bannerlist.value = res.result
-}
-onMounted(()=>getBanner())
 </script>
 
 <template>
@@ -45,7 +24,7 @@ onMounted(()=>getBanner())
        <!--轮播图 -->
       <div class="home-banner">
         <el-carousel height="500px">
-          <el-carousel-item v-for="item in bannerlist" :key="item.id">
+          <el-carousel-item v-for="item in bannerList" :key="item.id">
             <img :src="item.imgUrl" alt="">
           </el-carousel-item>
         </el-carousel>
