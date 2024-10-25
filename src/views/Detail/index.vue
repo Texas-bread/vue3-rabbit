@@ -80,7 +80,7 @@ onMounted(()=>getGoods())
                     <span>无忧退货</span>
                     <span>快速退款</span>
                     <span>免费包邮</span>
-                    <a href="javascript:;">了解详情</a>
+                    <a href="javascript:">了解详情</a>
                   </dd>
                 </dl>
               </div>
