@@ -1,6 +1,6 @@
 <script setup>
 import { getCategoryFilterAPI,getSubCategoryAPI } from "@/apis/category.js";
-import { ref,onMounted } from "vue";
+import {ref, onMounted} from "vue";
 import {useRoute} from "vue-router";
 import GoodItem from "@/views/Home/components/GoodItem.vue";
 //获取面包屑导航数据
@@ -26,6 +26,11 @@ const getGoodList = async () => {
   goodList.value= res.result.items
 }
 onMounted(()=>getGoodList())
+//tab切换回调
+const tabChange =() =>{
+  console.log('tab切换了',reqDate.value.sortField)
+  getGoodList()
+}
 </script>
 
 <template>
@@ -40,7 +45,7 @@ onMounted(()=>getGoodList())
       </el-breadcrumb>
     </div>
     <div class="sub-container">
-      <el-tabs>
+      <el-tabs v-model="reqDate.sortField" @tab-change="tabChange">
         <el-tab-pane label="最新商品" name="publishTime"></el-tab-pane>
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
