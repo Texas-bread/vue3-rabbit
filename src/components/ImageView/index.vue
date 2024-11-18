@@ -25,30 +25,36 @@ const top =ref(0)
 
 const positionX = ref(0)
 const positionY = ref(0)
-watch([elementX,elementY,isOutside],()=>{
-  console.log('xy变化了')
-//不移动不执行后面逻辑
-  if(isOutside.value)return
-  console.log('后面逻辑执行')
-  //有效范围内控制滑块距离
-  //横向
-  if(elementX.value>100&&elementX.value<300){
-    left.value=elementX.value-100
-  }
-  //纵向
-  if(elementY.value>100&&elementY.value<300){
-    top.value=elementY.value-100
-  }
-  //处理边界
-  if(elementX.value>300){ left.value=200 }
-  if(elementX.value<100){ left.value=0 }
+watch([elementX, elementY, isOutside], () => {
+  console.log('xy变化了');
 
-  if(elementY.value>300){ left.value=200 }
-  if(elementY.value<100){ left.value=0 }
-       //控制大图显示
-  positionX.value= -left.value*2;
-  positionY.value= -top.value*2;
-})
+  // 如果在外部，直接返回
+  if (isOutside.value) return;
+
+  console.log('后面逻辑执行');
+
+  // 更新位置
+  updatePosition(elementX.value, elementY.value);
+
+  // 控制大图显示
+  positionX.value = -left.value * 2;
+  positionY.value = -top.value * 2;
+});
+
+// 更新位置的函数
+function updatePosition(x, y) {
+  // 有效范围控制滑块距离
+  // 横向
+  left.value = clamp(x - 100, 0, 200);
+
+  // 纵向
+  top.value = clamp(y - 100, 0, 200);
+}
+
+// 边界控制函数：限制值在给定范围内
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
 
 </script>
 
