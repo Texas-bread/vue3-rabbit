@@ -14,7 +14,7 @@ const form = ref(
     }
 )
 //2.准备规则对象
-const rules = ref(
+const rules =
     {
       account:[
           { required:true,message:'用户名不能为空',trigger:"blur" }
@@ -40,9 +40,24 @@ const rules = ref(
         }
       ]
     }
-)
 
 
+//3.获取form实例做统一校验
+const formRef = ref(null)
+const doLogin = ()=>  {
+  //调用实例方法
+  formRef.value.validate((valid)=>{
+    //valid:所有表单都通过校验 才为true
+    console.log(valid)
+    //以valid作为判断条件 如果通过校验才执行登录逻辑
+    if(valid){
+      //TODO LOGIN
+    }
+  } )
+}
+//1.用户名和密码 只需要通过简单的配置(看element-plus文档方式-复杂功能通过多个组件拆解)
+//2.同意协议 自定义规则 (校验器)validator:(rule,value,callback)=>{}
+//统一校验 通过调用form实例的方法validate->  true
 </script>
 
 
@@ -80,7 +95,7 @@ const rules = ref(
                   我已同意隐私条款和服务条款
                 </el-checkbox>
               </el-form-item>
-              <el-button size="large" class="subBtn">点击登录</el-button>
+              <el-button size="large" class="subBtn" @click="doLogin">点击登录</el-button>
             </el-form>
           </div>
         </div>
