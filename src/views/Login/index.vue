@@ -4,7 +4,7 @@
 
 
 //表单校验(账号名+密码)
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import {  ElMessage } from "element-plus";
 import 'element-plus/es/components/message/style/css'
 import { useRouter } from "vue-router";
@@ -12,16 +12,16 @@ import { useUserStore } from "@/stores/user.js";
 
 const userStore = useUserStore();
 //1.准备表单对象
-const form = ref(
+const form = reactive(
     {
-      account:'18610848230',
+      account:'xiaotuxian001',
       password:'123456',
       agree:true,
     }
 )
 //2.准备规则对象
 const rules =
-    {
+   reactive( {
       account:[
           { required:true,message:'用户名不能为空',trigger:"blur" }
           ],
@@ -45,7 +45,7 @@ const rules =
           }
         }
       ]
-    }
+    })
 
 
 //3.获取form实例做统一校验
