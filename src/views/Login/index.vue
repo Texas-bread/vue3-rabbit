@@ -4,7 +4,7 @@
 
 
 //表单校验(账号名+密码)
-import { reactive, ref } from "vue";
+import {    ref } from "vue";
 import {  ElMessage } from "element-plus";
 import 'element-plus/es/components/message/style/css'
 import { useRouter } from "vue-router";
@@ -12,7 +12,7 @@ import { useUserStore } from "@/stores/user.js";
 
 const userStore = useUserStore();
 //1.准备表单对象
-const form = reactive(
+const form = ref(
     {
       account:'xiaotuxian001',
       password:'123456',
@@ -21,7 +21,7 @@ const form = reactive(
 )
 //2.准备规则对象
 const rules =
-   reactive( {
+   ref( {
       account:[
           { required:true,message:'用户名不能为空',trigger:"blur" }
           ],
@@ -69,6 +69,7 @@ const doLogin = ()=>  {
     }
   } )
 }
+
 //1.用户名和密码 只需要通过简单的配置(看element-plus文档方式-复杂功能通过多个组件拆解)
 //2.同意协议 自定义规则 (校验器)validator:(rule,value,callback)=>{}
 //统一校验 通过调用form实例的方法validate->  true
@@ -96,7 +97,7 @@ const doLogin = ()=>  {
         </nav>
         <div class="account-box">
           <div class="form">
-            <el-form  :model="form" :rules="rules" label-position="right" label-width="60px"
+            <el-form ref="formRef" :model="form" :rules="rules" label-position="right" label-width="60px"
                      status-icon>
               <el-form-item  prop="account" label="账户">
                 <el-input v-model="form.account" />
