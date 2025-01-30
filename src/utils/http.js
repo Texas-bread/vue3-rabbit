@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {useUserStore} from "@/stores/user.js";
-
+import {ElMessage} from "element-plus";
+import router from "@/router/index.js";
 // 创建axios实例
 const http = axios.create({
     baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
@@ -23,6 +24,19 @@ http.interceptors.request.use(config => {
 
 // axios响应拦截器
 http.interceptors.response.use(res => res.data, e => {
+    const userStore = useUserStore()
+    //统一的错误提醒
+    ElMessage({
+        type: 'warning',
+        message: e.response.data.message,
+    })
+    //401token失效处理
+    //1.清理本地数据
+    //2.跳转到登录页
+    if(e.response.status === 401) {
+        userStore.clearUserInfo()
+        router.push('/login')
+    }
     return Promise.reject(e);
 });
 
