@@ -25,4 +25,5 @@ export const useUserStore = defineStore("users", ()=>{
     }
 },{
     persist:true,
-})
+}
+)
