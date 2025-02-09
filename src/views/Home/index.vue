@@ -22,6 +22,6 @@ import HomePanel from "@/views/Home/components/HomePanel.vue";
     </div>
   </HomePanel>
   <HomePanel title="人气推荐" sub-title="人气推荐 好多商品">
-    我是人气推荐的插槽
+      我是人气推荐的插槽
   </HomePanel>
 </template>
